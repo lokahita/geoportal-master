@@ -232,6 +232,8 @@ function App() {
         setBrowse={(e) => setBrowse(e)}
         setArea={(e) => setArea(e)}
         setMapLayer={(e) => setMapLayer(e)}
+        viewMetadata={(e) => viewMetadata(e)}
+        zoomToMap={(e) => zoomToMap(e)}
       />
       <Upload upload={upload} setUpload={(e) => setUpload(e)} setBuffer={(e) => setBuffer(e)} />
       <Legend legend={legend} resolution={resolution} mapLayer={mapLayer} setLegend={(e) => setLegend(e)} />
