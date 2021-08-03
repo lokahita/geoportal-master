@@ -95,6 +95,52 @@ export default function Metadata(props) {
 
     }, [props.identifierMetadata]);
 
+    function viewSubjects(subjects){
+        if(subjects){
+            var s = JSON.parse(subjects);
+            if (s){
+                var list = []
+                s.forEach(function(x) {
+                    //console.log(x.keywords);
+                    x.keywords.forEach(function(y){
+                        list.push(y)
+                    });
+                });
+                //console.log(s[0].keywords);
+                //console.log(s[0].keywords.join(", "));
+                //console.log(list)
+                if (list)
+                    return list.join(", ");
+                else
+                    return "";
+            }
+        }
+    }
+
+    function viewReferences(subjects){
+        if(subjects){
+            var s = JSON.parse(subjects);
+            if (s){
+                var list = "";
+                s.forEach(function(x) {
+                    console.log(x);
+                    console.log(x.name);
+                    if (x.name !== null)
+                        list +=  x.protocol + "<br /><a href='"+ x.url+ "' target='_blank' >" + x.name + "</a><hr />";
+                    //+ <br /> + x.url + <hr /> + <br /> 
+                    //x.keywords.forEach(function(y){
+                    //    list.push(y)
+                    //});
+                });
+                //console.log(s[0].keywords);
+                //console.log(s[0].keywords.join(", "));
+                //console.log(list)
+                return <div dangerouslySetInnerHTML={{ __html: list }} />
+                //return list
+            }
+        }
+    }
+
 
     return (
         <div id="metadata" className={props.showMetadata ? 'show' : 'hide'} >
@@ -145,7 +191,7 @@ export default function Metadata(props) {
                 </Col>
                 <Col lg={9} className="pt-2 px-1">
                     {
-                        data ? data.keywords : null
+                        data ? viewSubjects(data.keywords) : null
                     }
                 </Col>
             </Row>
@@ -155,7 +201,7 @@ export default function Metadata(props) {
                 </Col>
                 <Col lg={9} className="pt-2 px-1" style={{maxHeight:"100px", overflowY:"auto"}}>
                     {
-                        data ? data.distributions : null
+                        data ? viewReferences(data.distributions) : null
                     }
                 </Col>
             </Row>
