@@ -1578,7 +1578,27 @@ export default function Browse(props) {
         document.onmousemove = null;
     }
 
-
+    function viewSubject(){
+        if(subjects){
+            var s = JSON.parse(subjects);
+            if (s){
+                var list = []
+                s.forEach(function(x) {
+                    //console.log(x.keywords);
+                    x.keywords.forEach(function(y){
+                        list.push(y)
+                    });
+                });
+                //console.log(s[0].keywords);
+                //console.log(s[0].keywords.join(", "));
+                //console.log(list)
+                if (list)
+                    return list.join(", ");
+                else
+                    return "";
+            }
+        }
+    }
 
 
     return (
@@ -1668,7 +1688,9 @@ export default function Browse(props) {
                     <div className="px-2 text-dark">
                         <b>Keywords</b>:
                         <div style={{ maxHeight: "60px", overflowY: "auto" }}>
-                            {subjects}
+                            {
+                               viewSubject()
+                            }
                         </div>
                     </div>
                     <div className="px-2 text-dark">
